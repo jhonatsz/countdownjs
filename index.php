@@ -7,7 +7,7 @@
 	<script type="text/javascript">
 		// date_format(year, month, day, hours, minutes, seconds, milliseconds)
 		$(function () {
-			var shortly = new Date(2013,8,18,-6,-23);
+			var shortly = new Date(2013,8,28,-6,-23);
 			$('#timer').countdown({
 				until: shortly,
 				format:'HMS',
