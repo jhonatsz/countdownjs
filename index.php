@@ -7,9 +7,15 @@
 	<script type="text/javascript">
 		// date_format(year, month, day, hours, minutes, seconds, milliseconds)
 		$(function () {
+			var shortly = new Date(2013,8,18,-6,-23);
 			$('#timer').countdown({
-				until: new Date(2013,8,18,-6,-23),
-				format:'HMS'
+				until: shortly,
+				format:'HMS',
+			});
+			
+			$('.bidder').click(function() { 
+				shortly.setSeconds(shortly.getSeconds() + 5.5); 
+				$('#timer').countdown('option', {until: shortly}); 
 			});
 			
 			$('.bidder').click(function(){
@@ -20,6 +26,8 @@
 				 $('#currentBidprice').html(upBid);
 				 $('#lastbidder').html(lastBidder);
 			});
+			
+			
 		});
 	</script>
 	<style type="text/css">
