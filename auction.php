@@ -1,11 +1,15 @@
 <?php
 	session_start();
-	if(@$_POST['submit']){
+	if(@$_POST['login']){
 	//@$_SESSION['UNAME'] = $_POST['UNAME'];
 	//@$_SESSION['PWORd'] = $_POST['PWORD'];
 	@$_SESSION['LOGS']	= TRUE;
 	}
+	if(@$_POST['logout']){
+		session_destroy();
+	}
 	//session_destroy();
+	
 ?>
 <!doctype html>
 <html>
@@ -77,14 +81,14 @@
 				<form action='auction.php' method='post' class='login-form'>
 					<label>User: </label><input name='uname' id='logfields' class='uname' type='text' placeholder='Username/Email'>
 					<label>Pass: </label><input name='pword' id='logfields' class='pword' type='password' placeholder='Password'>
-					<input type='submit' value='Signin' name='submit'>
+					<input type='submit' value='Signin' name='login'>
 				</form>
 			</td>
 			<td height='120'></td>
 		</tr>
 		<?php }else{ ?>
 		<tr>
-			<td width='100%'colspan="4" align='center' style='color:orange;font-weight:bold;padding:45px 0 45px 0;font-size:60px;'>
+			<td width='100%'colspan="4" align='center' style='color:orange;font-weight:bold;padding:5px 0 5px 0;font-size:50px;'>
 				<a class='Bidnow' href='bid.php' target='_tab' style='text-decoration:none;color:orange;'>BID NOW.. !</a>
 			</td>
 		</tr>
@@ -121,6 +125,15 @@
 			</td>
 			<td width='25%'></td>
 		</tr>
+		<?php if(isset($_SESSION['LOGS']) == TRUE){?>
+		<tr>
+			<td width='100%'colspan="4" align='center' style='color:orange;font-weight:bold;padding:5px 0 5px 0;font-size:50px;'>
+				<form method='post' action='auction.php'>
+				<input type='submit' style='text-decoration:none;color:blue;' value='Log out' name='logout'>
+				</form>
+			</td>
+		</tr>
+		<?php } ?>
 		<!--<tr>
 			<td width='25%' align='center'>
 				<img src='http://placehold.it/242x200&text=MacBook Air'>
