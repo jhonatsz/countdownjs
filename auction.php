@@ -1,3 +1,12 @@
+<?php
+	session_start();
+	if(@$_POST['submit']){
+	//@$_SESSION['UNAME'] = $_POST['UNAME'];
+	//@$_SESSION['PWORd'] = $_POST['PWORD'];
+	@$_SESSION['LOGS']	= TRUE;
+	}
+	//session_destroy();
+?>
 <!doctype html>
 <html>
 <head>
@@ -33,16 +42,21 @@
 					var Uname = $(".uname").val();
 					var Pword = $(".pword").val();
 					if($.trim(Uname).length == 0 || $.trim(Pword).length == 0){
-						alert('Fill Up empty fields.!');
+						//alert('Fill Up empty fields.!');
+						isFormValid = false;
 					}
 					else if($.trim(Uname).toLowerCase() == 'demo' && $.trim(Pword).toLowerCase() == 'demo'){
-						alert('Inputs are valid.!');
+						//alert('Inputs are valid.!');
+						isFormValid = true;
 					}
 					else{
-						alert('Incorrect Login Details.!');
+						//alert('Incorrect Login Details.!');
+						isFormValid = false;
 					}
 				});
-				 if (!isFormValid) alert("Please fill in all the required fields (highlighted in red)");
+				 if (!isFormValid) alert("Please use provided login credentials.. !");
+				 
+				return (isFormValid === true)? true : false ; 
 				//return isFormValid;
 			});
 		});
@@ -50,49 +64,62 @@
 	</script>
 	<style type="text/css">
 		.timer { width: 240px; height: 45px;text-align:center; }
+		a:hover{
+			background-color:green;
+		}
 	</style>
 </head>
 <body>
 	<table width='100%' height='100%'>
+		<?php if(isset($_SESSION['LOGS']) == FALSE){?>
 		<tr>
 			<td width='100%'colspan="4" align='center'><b>Login [user:<span  style='color:red;'>demo</span>:pass:<span style='color:red;'>demo</span>]</b> 
-				<form action='#' method='post' class='login-form'>
-					<label>User: </label><input id='logfields' class='uname' type='text' placeholder='Username/Email'>
-					<label>Pass: </label><input id='logfields' class='pword' type='password' placeholder='Password'>
-					<input type='submit' value='Signin'>
+				<form action='auction.php' method='post' class='login-form'>
+					<label>User: </label><input name='uname' id='logfields' class='uname' type='text' placeholder='Username/Email'>
+					<label>Pass: </label><input name='pword' id='logfields' class='pword' type='password' placeholder='Password'>
+					<input type='submit' value='Signin' name='submit'>
 				</form>
 			</td>
 			<td height='120'></td>
 		</tr>
+		<?php }else{ ?>
 		<tr>
-			<td width='25%' align='center'>
+			<td width='100%'colspan="4" align='center' style='color:orange;font-weight:bold;padding:45px 0 45px 0;font-size:60px;'>
+				<a class='Bidnow' href='bid.php' target='_tab' style='text-decoration:none;color:orange;'>BID NOW.. !</a>
+			</td>
+		</tr>
+		<?php } ?>
+		<tr>
+			<!--<td width='25%' align='center'>
 				<img src='http://placehold.it/242x200&text=Cannon 4S'>
 				<div class='timer'></div>
 				<div class='bidder'> $1.00 </div>
 				<div class='bidder'> Kaii </div>
 				<div><button> Bid </button></div>
-			</td>
-			<td width='25%' align='center'>
+			</td>-->
+			<!--<td width='25%' align='center'>
 				<img src='http://placehold.it/242x200&text=Nikkon D440'>
 				<div class='timer'></div>
 				<div class='bidder'> $1.00 </div>
 				<div class='bidder'> Kaii </div>
 				<div><button> Bid </button></div>
-			</td>
+			</td>-->
+			<td width='25%'></td>
 			<td width='25%' align='center'>
 				<img src='http://placehold.it/242x200&text=Iphone 5'>
 				<div class='timer'></div>
 				<div class='bidder'> $1.00 </div>
 				<div class='bidder'> Kaii </div>
-				<div><button> Bid </button></div>
+				<div><a href='bid.php' target='_tab'>Bid</a> </div>
 			</td>
 			<td width='25%' align='center'>
 				<img src='http://placehold.it/242x200&text=Lennovo G470'>
 				<div class='timer'></div>
 				<div class='bidder'> $1.00 </div>
 				<div class='bidder'> Kaii </div>
-				<div><button> Bid </button></div>
+				<div><a href='bid.php' target='_tab'>Bid</a></div>
 			</td>
+			<td width='25%'></td>
 		</tr>
 		<!--<tr>
 			<td width='25%' align='center'>
